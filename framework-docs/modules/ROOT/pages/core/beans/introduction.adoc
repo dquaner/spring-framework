@@ -1,43 +1,47 @@
 [[beans-introduction]]
 = Introduction to the Spring IoC Container and Beans
 
-This chapter covers the Spring Framework implementation of the Inversion of Control (IoC)
-principle. Dependency injection (DI) is a specialized form of IoC, whereby objects define
-their dependencies (that is, the other objects they work with) only through constructor
-arguments, arguments to a factory method, or properties that are set on the object
-instance after it is constructed or returned from a factory method. The IoC container
-then injects those dependencies when it creates the bean. This process is fundamentally
-the inverse (hence the name, Inversion of Control) of the bean itself controlling the
-instantiation or location of its dependencies by using direct construction of classes or
-a mechanism such as the Service Locator pattern.
+This chapter covers the Spring Framework implementation of the Inversion of Control (IoC) principle. 
+Dependency injection (DI) is a specialized form of IoC, whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method. The IoC container then injects those dependencies when it creates the bean. 
+This process is fundamentally the inverse (hence the name, Inversion of Control) of the bean itself controlling the instantiation or location of its dependencies by using direct construction of classes or a mechanism such as the Service Locator pattern.  +
+本章涵盖了Spring框架的控制反转（IoC）原理的实现。
+依赖注入（DI）是 IoC 的一种特殊形式，对象仅通过
+1. 构造函数参数、
+2. 工厂方法的参数、
+3. 或对象实例（从构造方法或工厂方法返回的）上设置的属性
+来定义它们的依赖项（即与它们一起工作的其他对象）。
+然后IoC容器在创建bean时注入这些依赖项。
+这个过程基本上是bean本身的逆过程（因此得名为控制反转），通过使用类的直接构造或Service Locator模式等机制来控制其依赖项的实例化或位置。
 
-The `org.springframework.beans` and `org.springframework.context` packages are the basis
-for Spring Framework's IoC container. The
+The `org.springframework.beans` and `org.springframework.context` packages are the basis for Spring Framework's IoC container. 
+The {spring-framework-api}/beans/factory/BeanFactory.html[`BeanFactory`]
+interface provides an advanced configuration mechanism capable of managing any type of object.
+{spring-framework-api}/context/ApplicationContext.html[`ApplicationContext`] is a sub-interface of `BeanFactory`. It adds:  +
+`org.springframework.beans` 和 `org.springframework.context` 是Spring Framework的IoC容器的基础。
 {spring-framework-api}/beans/factory/BeanFactory.html[`BeanFactory`]
-interface provides an advanced configuration mechanism capable of managing any type of
-object.
-{spring-framework-api}/context/ApplicationContext.html[`ApplicationContext`]
-is a sub-interface of `BeanFactory`. It adds:
+接口提供了一种高级的配置机制，能够管理任何类型的对象。
+{spring-framework-api}/context/ApplicationContext.html[`ApplicationContext`] 是 `BeanFactory` 的子接口。它添加了:
 
-* Easier integration with Spring's AOP features
-* Message resource handling (for use in internationalization)
-* Event publication
-* Application-layer specific contexts such as the `WebApplicationContext`
-for use in web applications.
+* Easier integration with Spring's AOP features  +
+    更容易地与Spring的AOP特性集成
+* Message resource handling (for use in internationalization)  +
+    消息资源处理（用于国际化）
+* Event publication  +
+    事件发布
+* Application-layer specific contexts such as the `WebApplicationContext` for use in web applications.  +
+    应用程序层特定的上下文，例如用于web应用程序的 `WebApplicationContext`。
 
-In short, the `BeanFactory` provides the configuration framework and basic functionality,
-and the `ApplicationContext` adds more enterprise-specific functionality. The
-`ApplicationContext` is a complete superset of the `BeanFactory` and is used exclusively
-in this chapter in descriptions of Spring's IoC container. For more information on using
-the `BeanFactory` instead of the `ApplicationContext,` see the section covering the
-xref:core/beans/beanfactory.adoc[`BeanFactory` API].
+In short, the `BeanFactory` provides the configuration framework and basic functionality, and the `ApplicationContext` adds more enterprise-specific functionality. 
+The `ApplicationContext` is a complete superset of the `BeanFactory` and is used exclusively in this chapter in descriptions of Spring's IoC container. For more information on using the `BeanFactory` instead of the `ApplicationContext,` 
+see the section covering the
+xref:core/beans/beanfactory.adoc[`BeanFactory` API].  +
+简而言之， `BeanFactory` 提供了配置框架和基本功能，而 `ApplicationContext` 则添加了更多特定于企业的功能。
+`ApplicationContext` 是 `BeanFactory` 的一个完整的超集，并且在本章中只用于描述Spring的IoC容器。有关使用 `BeanFactory` 而不是 `ApplicationContext` 的更多信息，查看
+xref:core/beans/beanfactory.adoc[`BeanFactory` API]。
 
-In Spring, the objects that form the backbone of your application and that are managed
-by the Spring IoC container are called beans. A bean is an object that is
-instantiated, assembled, and managed by a Spring IoC container. Otherwise, a
-bean is simply one of many objects in your application. Beans, and the dependencies
-among them, are reflected in the configuration metadata used by a container.
-
-
-
-
+In Spring, the objects that form the backbone of your application and that are managed by the Spring IoC container are called beans. 
+A bean is an object that is instantiated, assembled, and managed by a Spring IoC container. 
+Otherwise, a bean is simply one of many objects in your application. Beans, and the dependencies among them, are reflected in the configuration metadata used by a container.  +
+在Spring中，构成应用程序骨干并由Spring IoC容器管理的对象称为bean。
+bean是由Spring IoC容器实例化、组装和管理的对象。
+否则，bean只是应用程序中众多对象中的一个。bean以及它们之间的依赖关系反映在容器使用的配置元数据中。
